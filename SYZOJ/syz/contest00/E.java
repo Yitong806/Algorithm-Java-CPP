@@ -6,8 +6,8 @@ import java.math.BigInteger;
 import java.util.StringTokenizer;
 
 public class E {
-    private static boolean[] isPrime = new boolean[(int) 2e6+10];
-    private static int[] primeSize = new int[(int) 2e6 +10];
+    private static final boolean[] isPrime = new boolean[(int) 2e6+10];
+    private static final int[] primeSize = new int[(int) 2e6 +10];
 
     public static void main(String[] args) {
         FastReader fastReader = new FastReader(System.in);
@@ -19,8 +19,8 @@ public class E {
         int q = fastReader.nextInt();
 
         for (int i = 0; i < q; i++) {
-            int l = 1;
-            int r = 2000000;
+            int l = fastReader.nextInt();
+            int r = fastReader.nextInt();
 
             int primeCount = primeSize[r]-primeSize[l-1];
 
@@ -45,7 +45,6 @@ public class E {
                     primeSize[i] = primeSize[i-1];
                 }
             }
-
         }
     }
 
