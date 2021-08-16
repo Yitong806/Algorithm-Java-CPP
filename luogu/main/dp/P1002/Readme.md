@@ -1,4 +1,4 @@
-# Explanation to DP Problems in Luogu
+# Explanation to P1002 in Luogu
 
 ### P1002 过河卒
 难度：普及-   
