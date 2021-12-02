@@ -1,60 +1,55 @@
-package luogu.main.simulation;
+package luogu.main.string;
 
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Objects;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.StringTokenizer;
 
-public class P2670 {
+public class P1012 {
     public static void main(String[] args) {
         FastReader fastReader = new FastReader(System.in);
         FastWriter fastWriter = new FastWriter(System.out);
 
-        int m = fastReader.nextInt();
         int n = fastReader.nextInt();
-        char[][] cs = new char[m][];
-        char[][] map = new char[m][n];
-        for (int i = 0; i < m; i++) {
-            cs[i] = Objects.requireNonNull(fastReader.nextLine()).toCharArray();
+        String[] array = new String[n];
+
+        for (int i = 0; i < n; i++) {
+            array[i] = fastReader.next();
         }
 
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if(cs[i][j] == '*'){
-                    map[i][j] = '*';
-                    continue;
-                }
+        Arrays.sort(array, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                int length1 = o1.length();
+                int length2 = o2.length();
+                int lim = Math.min(length1,length2);
 
-                char cnt = '0';
-                for (int di = -1; di <= 1; di++) {
-                    for (int dj = -1; dj <= 1; dj++) {
-                        if (di == 0 && dj == 0) {
-                            continue;
-                        }
-
-                        int x = i + di, y = j + dj;
-                        if (!(0 <= x && x < m && 0 <= y && y < n)) {
-                            continue;
-                        }
-
-                        if(cs[x][y] == '*'){
-                            cnt++;
-                        }
-
+                int k = 0;
+                while (k<lim){
+                    char c1 = o1.charAt(k);
+                    char c2 = o2.charAt(k);
+                    if(c1!=c2){
+                        return c2-c1;
                     }
+                    k++;
                 }
 
-                map[i][j] = cnt;
+                if(length1>length2){
+                    return compare(o1.substring(length2),o2);
+                }else if(length1<length2){
+                    return compare(o1,o2.substring(length1));
+                }else {
+                    return 0;
+                }
             }
-        }
+        });
 
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                System.out.print(map[i][j]);
-            }
-            System.out.println();
-        }
+        fastWriter.println(String.join("",array));
+
+        fastReader.close();
+        fastWriter.close();
     }
 
     private static class FastReader implements Closeable {
@@ -79,9 +74,9 @@ public class P2670 {
         }
 
         public boolean hasNext() {
-            while (!st.hasMoreTokens()) {
+            while(!st.hasMoreTokens()) {
                 String s = nextLine();
-                if (s == null) return false;
+                if(s==null) return false;
                 eat(s);
             }
             return true;
@@ -92,7 +87,7 @@ public class P2670 {
             return st.nextToken();
         }
 
-        public boolean nextBoolean() {
+        public boolean nextBoolean(){
             return Boolean.parseBoolean(next());
         }
 
@@ -105,27 +100,27 @@ public class P2670 {
             return Long.parseLong(next());
         }
 
-        public float nextFloat() {
+        public float nextFloat(){
             return Float.parseFloat(next());
         }
 
-        public double nextDouble() {
+        public double nextDouble(){
             return Double.parseDouble(next());
         }
 
-        public BigInteger nextBigInteger() {
+        public BigInteger nextBigInteger(){
             return new BigInteger(next());
         }
 
-        public BigDecimal nextBigDecimal() {
+        public BigDecimal nextBigDecimal(){
             return new BigDecimal(next());
         }
 
-        public void close() {
-            try {
-                st = null;
+        public void close(){
+            try{
+                st=null;
                 br.close();
-            } catch (IOException e) {
+            }catch (IOException e){
                 e.printStackTrace();
                 System.exit(1);
             }
@@ -133,26 +128,26 @@ public class P2670 {
         }
     }
 
-    private static class FastWriter implements Closeable {
+    private static class FastWriter implements Closeable{
         private final PrintWriter writer;
 
-        public FastWriter(OutputStream out) {
-            this.writer = new PrintWriter(out);
+        public FastWriter(OutputStream out){
+            this.writer=new PrintWriter(out);
         }
 
-        public void print(Object object) {
+        public void print(Object object){
             writer.write(object.toString());
         }
 
-        public void printf(String format, Object... os) {
-            writer.write(String.format(format, os));
+        public void printf(String format,Object... os){
+            writer.write(String.format(format,os));
         }
 
-        public void println() {
+        public void println(){
             writer.write(System.lineSeparator());
         }
 
-        public void println(Object object) {
+        public void println(Object object){
             writer.write(object.toString());
             writer.write(System.lineSeparator());
         }

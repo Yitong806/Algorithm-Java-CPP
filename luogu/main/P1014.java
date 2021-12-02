@@ -5,70 +5,48 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.StringTokenizer;
 
-public class P1042 {
-    private static final FastReader fastReader = new FastReader(System.in);
-    private static final FastWriter fastWriter = new FastWriter(System.out);
-
+public class P1014 {
     public static void main(String[] args) {
-        String plays = readString();
-        process(plays,11);
-        process(plays,21);
+        FastReader fastReader = new FastReader(System.in);
+        FastWriter fastWriter = new FastWriter(System.out);
+
+        int N = fastReader.nextInt();
+
+        fastWriter.println(simulation(N));
+
         fastReader.close();
         fastWriter.close();
     }
+    private static String simulation(int N){
+        int x = 1;
+        int y = 1;
 
-    private static String readString(){
-        StringBuilder b = new StringBuilder();
-        while (true){
-            String s = fastReader.nextLine();
-            if(s == null){
-                return b.toString();
-            }
-            for (char c: s.toCharArray()){
-                if(c == 'E'){
-                    return b.toString();
+        for (int i = 1; i < N; i++) {
+            if((x+y)%2==1){
+                x++;
+                y--;
+
+                if(outBound(x, y)){
+                    x--;
+                    y++;
+                    x++;
                 }
-                b.append(c);
+            }else {
+                x--;
+                y++;
+                if(outBound(x, y)){
+                    x++;
+                    y--;
+                    y++;
+                }
             }
         }
+
+        return x+"/"+y;
     }
 
-    private static void process(String plays, int cnt){
-        int mine = 0;
-        int opponent = 0;
-
-        char[] cs = plays.toCharArray();
-        int index = 0;
-        boolean printed = false;
-        while (index < cs.length){
-            while ((mine < cnt && opponent < cnt) || Math.abs(mine - opponent) < 2){
-                if(cs[index] == 'W'){
-                    mine++;
-
-                }else {
-                    opponent++;
-                }
-                index++;
-
-                if(index == cs.length){
-                    break;
-                }
-            }
-            printed = true;
-            fastWriter.println(mine+":"+opponent);
-            if(index == cs.length){
-                break;
-            }
-            mine = opponent = 0;
-        }
-
-        if(!((mine < cnt && opponent < cnt) || Math.abs(mine - opponent) < 2) || !printed){
-            fastWriter.println("0:0");
-        }
-
-
-        fastWriter.println();
-
+    private static boolean outBound(int x, int y){
+        return x < 1 || y < 1;
     }
 
     private static class FastReader implements Closeable {
