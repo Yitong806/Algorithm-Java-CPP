@@ -1,130 +1,59 @@
-package luogu.main.math;
+<<<<<<< HEAD:luogu/main/simulation_highPrecision/P1012.java
+package luogu.main.simulation_highPrecision;
+=======
+package luogu.main.string;
+>>>>>>> ef495ec5ffc5b2e0c7600edae059e8b8b1644517:luogu/main/P1012.java
 
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.StringTokenizer;
 
-public class P1009 {
+public class P1012 {
     public static void main(String[] args) {
         FastReader fastReader = new FastReader(System.in);
         FastWriter fastWriter = new FastWriter(System.out);
-        
-        int n = fastReader.nextInt();
 
-        fastWriter.println(calculate(n));
+        int n = fastReader.nextInt();
+        String[] array = new String[n];
+
+        for (int i = 0; i < n; i++) {
+            array[i] = fastReader.next();
+        }
+
+        Arrays.sort(array, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                int length1 = o1.length();
+                int length2 = o2.length();
+                int lim = Math.min(length1,length2);
+
+                int k = 0;
+                while (k<lim){
+                    char c1 = o1.charAt(k);
+                    char c2 = o2.charAt(k);
+                    if(c1!=c2){
+                        return c2-c1;
+                    }
+                    k++;
+                }
+
+                if(length1>length2){
+                    return compare(o1.substring(length2),o2);
+                }else if(length1<length2){
+                    return compare(o1,o2.substring(length1));
+                }else {
+                    return 0;
+                }
+            }
+        });
+
+        fastWriter.println(String.join("",array));
 
         fastReader.close();
         fastWriter.close();
-    }
-    private static String calculate(int n){
-        String sum = "0";
-        String pow = "1";
-
-        for (int i = 1; i <= n; i++) {
-            String nString = String.valueOf(i);
-
-            pow = multiply(pow,nString);
-            sum = add(sum,pow);
-        }
-
-        return sum;
-    }
-    
-    private static String multiply(String s1,String s2){
-        int maxLength = Math.max(s1.length(),s2.length());
-
-        s1 = append0(s1,maxLength);
-        s2 = append0(s2,maxLength);
-
-        long[] num1 = change2Array(s1);
-        long[] num2 = change2Array(s2);
-
-        long[] result = new long[num1.length + num2.length];
-
-        for (int i = num1.length - 1; i>= 0;i--){
-
-            long carry = 0;
-            for (int j = num2.length - 1; j >= 0||carry!=0; j--) {
-                long number = carry + result[i + j + 1];
-
-                if(j>=0){
-                    number += num1[i]*num2[j];
-                }
-
-                carry = number/10;
-                number %= 10;
-
-                result[i + j + 1] = number;
-            }
-        }
-
-        return change2String(result);
-    }
-
-    private static String add(String s1,String s2){
-        int maxLength = Math.max(s1.length(),s2.length());
-
-        s1 = append0(s1, maxLength);
-        s2 = append0(s2, maxLength);
-
-        long[] num1 = change2Array(s1);
-        long[] num2 = change2Array(s2);
-
-        long carry = 0;
-        long[] result = new long[maxLength+1];
-
-        for (int i = maxLength - 1; i >= 0 || carry!=0; i--) {
-            long sum = carry;
-
-            if(i>=0){
-                sum += num1[i] + num2[i];
-            }
-
-            carry = sum / 10;
-            sum %= 10;
-
-            result[i+1] = sum;
-        }
-
-        return change2String(result);
-    }
-
-    private static String append0(String s,int maxLength){
-        StringBuilder b = new StringBuilder(s);
-
-        while (b.length()<maxLength){
-            b.insert(0,0);
-        }
-
-        return b.toString();
-    }
-
-    private static long[] change2Array(String s){
-        long[] num = new long[s.length()];
-
-        for (int i = 0; i < s.length(); i++) {
-            num[i] = s.charAt(i)-'0';
-        }
-
-        return num;
-    }
-
-    private static String change2String(long[] arr){
-        StringBuilder b = new StringBuilder();
-
-        boolean no0 = false;
-        for(long l: arr){
-            if(l!=0){
-                no0 = true;
-            }
-
-            if(no0){
-                b.append(l);
-            }
-        }
-
-        return no0?b.toString():"0";
     }
 
     private static class FastReader implements Closeable {

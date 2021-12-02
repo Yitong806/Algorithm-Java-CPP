@@ -1,22 +1,39 @@
-package luogu.main.basic;
+<<<<<<< HEAD:luogu/main/simulation_highPrecision/P1028.java
+package luogu.main.simulation_highPrecision;
+=======
+package luogu.main.recursion;
+>>>>>>> ef495ec5ffc5b2e0c7600edae059e8b8b1644517:luogu/main/P1028.java
 
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.StringTokenizer;
 
-public class P1001 {
+public class P1028 {
+    private static final long[] result = new long[1007];
+
     public static void main(String[] args) {
         FastReader fastReader = new FastReader(System.in);
         FastWriter fastWriter = new FastWriter(System.out);
 
-        long l1 = fastReader.nextLong();
-        long l2 = fastReader.nextLong();
+        buildResult();
 
-        fastWriter.println(l1+l2);
+        int n = fastReader.nextInt();
+        fastWriter.println(result[n]);
 
         fastReader.close();
         fastWriter.close();
+    }
+    private static void buildResult(){
+        result[0] = 0;
+        result[1] = 1;
+        for (int i = 2; i < result.length; i++) {
+            if(i%2==0){
+                result[i] = result[i-1]+ result[i/2];
+            }else {
+                result[i] = result[i-1];
+            }
+        }
     }
 
     private static class FastReader implements Closeable {

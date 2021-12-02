@@ -1,41 +1,26 @@
-package luogu.main.simulation;
+<<<<<<< HEAD:luogu/main/simulation_highPrecision/P1001.java
+package luogu.main.simulation_highPrecision;
+=======
+package luogu.main.basic;
+>>>>>>> ef495ec5ffc5b2e0c7600edae059e8b8b1644517:luogu/main/P1001.java
 
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.StringTokenizer;
 
-public class P1008 {
+public class P1001 {
     public static void main(String[] args) {
         FastReader fastReader = new FastReader(System.in);
         FastWriter fastWriter = new FastWriter(System.out);
 
-        for (int a = 123; a *3 <= 987; a++){
-            int b = a*2;
-            int c = a*3;
+        long l1 = fastReader.nextLong();
+        long l2 = fastReader.nextLong();
 
-            String abc = a+" "+b+" "+c;
-
-            if(isValid(abc)){
-                fastWriter.println(abc);
-            }
-        }
+        fastWriter.println(l1+l2);
 
         fastReader.close();
         fastWriter.close();
-    }
-    private static boolean isValid(String abc){
-        Set<Character>cs = new HashSet<>();
-        for(int i = 0;i< abc.length();i++){
-            if(abc.charAt(i)=='0'){
-                return false;
-            }
-            cs.add(abc.charAt(i));
-        }
-
-        return cs.size()==9+1;
     }
 
     private static class FastReader implements Closeable {

@@ -1,35 +1,27 @@
-package luogu.main.greedy;
+<<<<<<< HEAD:luogu/main/simulation_highPrecision/P2001.java
+package luogu.main.simulation_highPrecision;
+=======
+package luogu.main.basic;
+>>>>>>> ef495ec5ffc5b2e0c7600edae059e8b8b1644517:luogu/main/P2001.java
 
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.StringTokenizer;
 
-public class P1007 {
+public class P2001 {
+
     public static void main(String[] args) {
         FastReader fastReader = new FastReader(System.in);
         FastWriter fastWriter = new FastWriter(System.out);
 
-        long L = fastReader.nextLong();
+        long l1 = fastReader.nextLong();
+        long l2 = fastReader.nextLong();
 
-        int n = fastReader.nextInt();
-        long[] soldierPlace = new long[n];
-
-        long minAnswer = 0;
-        long maxAnswer = 0;
-        for (int i = 0; i < n; i++) {
-            soldierPlace[i] = fastReader.nextLong();
-
-            minAnswer = Math.max(minAnswer,Math.min(L+1-soldierPlace[i],soldierPlace[i]));
-            maxAnswer = Math.max(maxAnswer,Math.max(L+1-soldierPlace[i],soldierPlace[i]));
-        }
-
-        fastWriter.println(minAnswer+" "+maxAnswer);
+        fastWriter.println(l1+l2);
 
         fastReader.close();
         fastWriter.close();
-
-
     }
 
     private static class FastReader implements Closeable {

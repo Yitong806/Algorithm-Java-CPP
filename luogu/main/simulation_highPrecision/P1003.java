@@ -1,66 +1,52 @@
-package luogu.main.math;
+package luogu.main.simulation_highPrecision;
 
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.StringTokenizer;
 
-public class P1010 {
-    private static final StringBuilder answerBuilder = new StringBuilder();
+public class P1003 {
     public static void main(String[] args) {
         FastReader fastReader = new FastReader(System.in);
         FastWriter fastWriter = new FastWriter(System.out);
 
-        int n= fastReader.nextInt();
-        buildAnswer(n);
+        int n = fastReader.nextInt();
+        Carpet[] carpets = new Carpet[n];
+        for (int i = 0; i < n; i++) {
+            carpets[i] = new Carpet(i+1, fastReader.nextLong(), fastReader.nextLong(), fastReader.nextLong(), fastReader.nextLong());
+        }
 
-        fastWriter.println(answerBuilder.toString());
+        long x = fastReader.nextLong();
+        long y = fastReader.nextLong();
+
+        int answer = -1;
+
+        for (Carpet c:carpets){
+            if(c.isOK(x,y)){
+                answer = c.index;
+            }
+        }
+
+        fastWriter.println(answer);
 
         fastReader.close();
         fastWriter.close();
     }
-    private static void buildAnswer(int n){
-        switch (n){
-            case 1:{
-                answerBuilder.append("2(0)");
-                return;
-            }
-            case 2:{
-                answerBuilder.append("2");
-                return;
-            }
-            case 4:{
-                answerBuilder.append("2(2)");
-                return;
-            }
 
-            default:{
-                int a = 0;
-                while (n!=0){
-                    if(n==1||n==2||n==4){
-                        buildAnswer(n);
-                        break;
-                    }
+    private static class Carpet{
+        int index;
+        long a,b,g,k;
 
-                    int maxPow = (int) Math.floor(Math.log(n)/Math.log(2));
+        public Carpet(int i,long a,long b,long g,long k){
+            this.index = i;
+            this.a=a;
+            this.b=b;
+            this.g=g;
+            this.k=k;
+        }
 
-                    if(maxPow == 1){
-                        answerBuilder.append("2");
-                    }else{
-                        answerBuilder.append("2(");
-                        buildAnswer(maxPow);
-                        answerBuilder.append(")");
-                    }
-
-                    int rest = (int) (n - Math.pow(2,maxPow));
-
-                    if(rest!=0){
-                        answerBuilder.append("+");
-                    }
-
-                    n = rest;
-                }
-            }
+        public boolean isOK(long x,long y){
+            return a<=x && x<= a+g && b<=y && y<= b+k;
         }
     }
 

@@ -1,51 +1,87 @@
-package luogu.main.simulation;
+<<<<<<< HEAD:luogu/main/simulation_highPrecision/P1030.java
+package luogu.main.simulation_highPrecision;
+=======
+package luogu.main.tree;
+>>>>>>> ef495ec5ffc5b2e0c7600edae059e8b8b1644517:luogu/main/P1030.java
 
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.StringTokenizer;
 
-public class P1015 {
+public class P1030 {
+
     public static void main(String[] args) {
         FastReader fastReader = new FastReader(System.in);
         FastWriter fastWriter = new FastWriter(System.out);
 
-        int N = fastReader.nextInt();
-        String M = fastReader.next();
+        String infix = fastReader.next();
+        String postfix = fastReader.next();
 
-        long step = getSteps(N,M);
-
-        fastWriter.println(step==-1?"Impossible!":"STEP="+step);
+        TreeNode root = buildTree(infix,postfix, 0,infix.length()-1,0,postfix.length()-1);
+        preorder(root,fastWriter);
 
         fastReader.close();
         fastWriter.close();
     }
-    private static long getSteps(int N,String M){
-        if(isHuiWen(M,N)){
-            return 0;
+    private static TreeNode buildTree(String infix, String postfix,
+                                      int infixLeft, int infixRight,
+                                      int postfixLeft, int postfixRight){
+        if(infix.isEmpty() || postfix.isEmpty()){
+            return null;
         }
 
-        for (int i = 1; i <= 30; i++) {
-            M = addReverse(N,M);
-            if(isHuiWen(M,N)){
-                return i;
-            }
+        if(infixLeft>infixRight||postfixLeft> postfixRight){
+            return null;
         }
 
-        return -1;
+        char rootChar = postfix.charAt(postfixRight);
+        int rootCharIndex = infix.indexOf(rootChar);
+        TreeNode root = new TreeNode(rootChar);
+
+        int nextInfixLeft_left = infixLeft;
+        int nextInfixRight_left = rootCharIndex - 1;
+
+        int nextInfixLeft_right = rootCharIndex + 1;
+        int nextInfixRight_right = infixRight;
+
+        int nextLength_left = nextInfixRight_left - nextInfixLeft_left + 1;
+        int nextLength_right = nextInfixRight_right - nextInfixLeft_right + 1;
+
+        int nextPostfixRight_right = postfixRight - 1;
+        int nextPostfixLeft_right = nextPostfixRight_right - nextLength_right + 1;
+
+        int nextPostfixRight_left = nextPostfixLeft_right - 1;
+        int nextPostfixLeft_left = nextPostfixRight_left - nextLength_left + 1;
+
+        root.leftChild = buildTree(infix,postfix,nextInfixLeft_left,
+                nextInfixRight_left,nextPostfixLeft_left,nextPostfixRight_left);
+
+        root.rightChild = buildTree(infix,postfix, nextInfixLeft_right,
+                nextInfixRight_right,nextPostfixLeft_right,nextPostfixRight_right);
+
+        return root;
     }
 
-    private static String addReverse(int N,String M){
-        BigInteger bi = new BigInteger(M,N);
-        BigInteger re = new BigInteger(new StringBuilder(M).reverse().toString(),N);
+    public static void preorder(TreeNode root, FastWriter fastWriter){
+        if(root==null){
+            return;
+        }
 
-        return bi.add(re).toString(N);
+        fastWriter.print(root.value);
+        preorder(root.leftChild,fastWriter);
+        preorder(root.rightChild,fastWriter);
+
     }
 
-    private static boolean isHuiWen(String number10, int N){
-        BigInteger bi = new BigInteger(number10,N);
+    private static class TreeNode{
+        char value;
+        TreeNode leftChild;
+        TreeNode rightChild;
 
-        return new StringBuilder().append(bi.toString(N)).reverse().toString().equals(bi.toString(N));
+        public TreeNode(char c){
+            this.value = c;
+        }
     }
 
     private static class FastReader implements Closeable {

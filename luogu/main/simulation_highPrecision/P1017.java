@@ -1,55 +1,48 @@
-package luogu.main.string;
+<<<<<<< HEAD:luogu/main/simulation_highPrecision/P1017.java
+package luogu.main.simulation_highPrecision;
+=======
+package luogu.main.math;
+>>>>>>> ef495ec5ffc5b2e0c7600edae059e8b8b1644517:luogu/main/P1017.java
 
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.StringTokenizer;
 
-public class P1012 {
+public class P1017 {
     public static void main(String[] args) {
         FastReader fastReader = new FastReader(System.in);
         FastWriter fastWriter = new FastWriter(System.out);
 
-        int n = fastReader.nextInt();
-        String[] array = new String[n];
+        int num10 = fastReader.nextInt();
 
-        for (int i = 0; i < n; i++) {
-            array[i] = fastReader.next();
-        }
+        int R = fastReader.nextInt();
 
-        Arrays.sort(array, new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                int length1 = o1.length();
-                int length2 = o2.length();
-                int lim = Math.min(length1,length2);
-
-                int k = 0;
-                while (k<lim){
-                    char c1 = o1.charAt(k);
-                    char c2 = o2.charAt(k);
-                    if(c1!=c2){
-                        return c2-c1;
-                    }
-                    k++;
-                }
-
-                if(length1>length2){
-                    return compare(o1.substring(length2),o2);
-                }else if(length1<length2){
-                    return compare(o1,o2.substring(length1));
-                }else {
-                    return 0;
-                }
-            }
-        });
-
-        fastWriter.println(String.join("",array));
+        fastWriter.println(answer(num10,R));
 
         fastReader.close();
         fastWriter.close();
+    }
+    private static String answer(int num10,int R){
+        //R = Math.abs(R);
+        int v = num10;
+
+        StringBuilder answerBuilder = new StringBuilder();
+
+        while (num10!=0){
+            int nu = num10 % R;
+            num10 /= R;
+
+            if(nu<0){
+                nu += Math.abs(R);
+                num10++;
+            }
+            answerBuilder.append(nu<10?nu:String.valueOf((char) ('A'+nu-10)));
+        }
+        answerBuilder.reverse();
+
+        return v + "=" +
+                answerBuilder + "(base" + R + ")";
     }
 
     private static class FastReader implements Closeable {

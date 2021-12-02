@@ -1,52 +1,105 @@
-package luogu.main.simulation;
+<<<<<<< HEAD:luogu/main/simulation_highPrecision/P1042.java
+package luogu.main.simulation_highPrecision;
+=======
+package luogu.main.greedy;
+>>>>>>> ef495ec5ffc5b2e0c7600edae059e8b8b1644517:luogu/main/P1007.java
 
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.StringTokenizer;
 
-public class P1014 {
+<<<<<<< HEAD:luogu/main/simulation_highPrecision/P1042.java
+public class P1042 {
+    private static final FastReader fastReader = new FastReader(System.in);
+    private static final FastWriter fastWriter = new FastWriter(System.out);
+
+    public static void main(String[] args) {
+        String plays = readString();
+        process(plays,11);
+        process(plays,21);
+        fastReader.close();
+        fastWriter.close();
+    }
+
+    private static String readString(){
+        StringBuilder b = new StringBuilder();
+        while (true){
+            String s = fastReader.nextLine();
+            if(s == null){
+                return b.toString();
+            }
+            for (char c: s.toCharArray()){
+                if(c == 'E'){
+                    return b.toString();
+                }
+                b.append(c);
+            }
+        }
+    }
+
+    private static void process(String plays, int cnt){
+        int mine = 0;
+        int opponent = 0;
+
+        char[] cs = plays.toCharArray();
+        int index = 0;
+        boolean printed = false;
+        while (index < cs.length){
+            while ((mine < cnt && opponent < cnt) || Math.abs(mine - opponent) < 2){
+                if(cs[index] == 'W'){
+                    mine++;
+
+                }else {
+                    opponent++;
+                }
+                index++;
+
+                if(index == cs.length){
+                    break;
+                }
+            }
+            printed = true;
+            fastWriter.println(mine+":"+opponent);
+            if(index == cs.length){
+                break;
+            }
+            mine = opponent = 0;
+        }
+
+        if(!((mine < cnt && opponent < cnt) || Math.abs(mine - opponent) < 2) || !printed){
+            fastWriter.println("0:0");
+        }
+
+
+        fastWriter.println();
+=======
+public class P1007 {
     public static void main(String[] args) {
         FastReader fastReader = new FastReader(System.in);
         FastWriter fastWriter = new FastWriter(System.out);
 
-        int N = fastReader.nextInt();
+        long L = fastReader.nextLong();
 
-        fastWriter.println(simulation(N));
+        int n = fastReader.nextInt();
+        long[] soldierPlace = new long[n];
+
+        long minAnswer = 0;
+        long maxAnswer = 0;
+        for (int i = 0; i < n; i++) {
+            soldierPlace[i] = fastReader.nextLong();
+
+            minAnswer = Math.max(minAnswer,Math.min(L+1-soldierPlace[i],soldierPlace[i]));
+            maxAnswer = Math.max(maxAnswer,Math.max(L+1-soldierPlace[i],soldierPlace[i]));
+        }
+
+        fastWriter.println(minAnswer+" "+maxAnswer);
 
         fastReader.close();
         fastWriter.close();
-    }
-    private static String simulation(int N){
-        int x = 1;
-        int y = 1;
 
-        for (int i = 1; i < N; i++) {
-            if((x+y)%2==1){
-                x++;
-                y--;
+>>>>>>> ef495ec5ffc5b2e0c7600edae059e8b8b1644517:luogu/main/P1007.java
 
-                if(outBound(x, y)){
-                    x--;
-                    y++;
-                    x++;
-                }
-            }else {
-                x--;
-                y++;
-                if(outBound(x, y)){
-                    x++;
-                    y--;
-                    y++;
-                }
-            }
-        }
-
-        return x+"/"+y;
-    }
-
-    private static boolean outBound(int x, int y){
-        return x < 1 || y < 1;
     }
 
     private static class FastReader implements Closeable {

@@ -1,78 +1,134 @@
+<<<<<<< HEAD:luogu/main/simulation_highPrecision/P1009.java
+package luogu.main.simulation_highPrecision;
+=======
 package luogu.main.math;
+>>>>>>> ef495ec5ffc5b2e0c7600edae059e8b8b1644517:luogu/main/P1009.java
 
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.StringTokenizer;
 
-public class P1011 {
-    private static final XNumber[] UP = new XNumber[30];
-    private static final XNumber[] DOWN =new XNumber[30];
-    private static final XNumber[] SIZE = new XNumber[30];
-
+public class P1009 {
     public static void main(String[] args) {
         FastReader fastReader = new FastReader(System.in);
         FastWriter fastWriter = new FastWriter(System.out);
+        
+        int n = fastReader.nextInt();
 
-        long a = fastReader.nextLong();
-        long n = fastReader.nextLong();
-        long m = fastReader.nextLong();
-        long x = fastReader.nextLong();
-
-        build(a,n);
-
-        fastWriter.println(getAnswer(a,n,m,x));
+        fastWriter.println(calculate(n));
 
         fastReader.close();
         fastWriter.close();
     }
-    private static long getAnswer(long a,long n,long m,long x){
-        if(x==1||x==2){
-            return a;
+    private static String calculate(int n){
+        String sum = "0";
+        String pow = "1";
+
+        for (int i = 1; i <= n; i++) {
+            String nString = String.valueOf(i);
+
+            pow = multiply(pow,nString);
+            sum = add(sum,pow);
         }
 
-        XNumber lastStation = SIZE[(int)n-1];
+        return sum;
+    }
+    
+    private static String multiply(String s1,String s2){
+        int maxLength = Math.max(s1.length(),s2.length());
 
-        long unknown = (m-lastStation.constant)/lastStation.xCoefficients;
+        s1 = append0(s1,maxLength);
+        s2 = append0(s2,maxLength);
 
-        XNumber expectedStation = SIZE[(int)x];
-        return expectedStation.xCoefficients*unknown+expectedStation.constant;
+        long[] num1 = change2Array(s1);
+        long[] num2 = change2Array(s2);
+
+        long[] result = new long[num1.length + num2.length];
+
+        for (int i = num1.length - 1; i>= 0;i--){
+
+            long carry = 0;
+            for (int j = num2.length - 1; j >= 0||carry!=0; j--) {
+                long number = carry + result[i + j + 1];
+
+                if(j>=0){
+                    number += num1[i]*num2[j];
+                }
+
+                carry = number/10;
+                number %= 10;
+
+                result[i + j + 1] = number;
+            }
+        }
+
+        return change2String(result);
     }
 
-    private static void build(long a,long n){
-        UP[0] = new XNumber(0,0);
-        UP[1] = new XNumber(0,a);
-        UP[2] = new XNumber(1,0);
+    private static String add(String s1,String s2){
+        int maxLength = Math.max(s1.length(),s2.length());
 
-        DOWN[0] = new XNumber(0,0);
-        DOWN[1] = new XNumber(0,0);
-        DOWN[2] = new XNumber(1,0);
+        s1 = append0(s1, maxLength);
+        s2 = append0(s2, maxLength);
 
-        SIZE[0] = new XNumber(0,0);
-        SIZE[1] = new XNumber(0,a);
-        SIZE[2] = new XNumber(0,a);
+        long[] num1 = change2Array(s1);
+        long[] num2 = change2Array(s2);
 
-        for (int i = 3; i < 30; i++) {
-            UP[i] = UP[i-1].add(UP[i-2]);
-            DOWN[i] = UP[i-1];
+        long carry = 0;
+        long[] result = new long[maxLength+1];
 
-            XNumber delta = new XNumber(UP[i].xCoefficients-DOWN[i].xCoefficients,UP[i].constant-DOWN[i].constant);
-            SIZE[i] = SIZE[i-1].add(delta);
+        for (int i = maxLength - 1; i >= 0 || carry!=0; i--) {
+            long sum = carry;
+
+            if(i>=0){
+                sum += num1[i] + num2[i];
+            }
+
+            carry = sum / 10;
+            sum %= 10;
+
+            result[i+1] = sum;
         }
+
+        return change2String(result);
     }
 
-    private static class XNumber{
-        private final long xCoefficients;
-        private final long constant;
+    private static String append0(String s,int maxLength){
+        StringBuilder b = new StringBuilder(s);
 
-        public XNumber(long co,long cst){
-            this.xCoefficients = co;
-            this.constant = cst;
+        while (b.length()<maxLength){
+            b.insert(0,0);
         }
 
-        public XNumber add(XNumber ax){
-            return new XNumber(this.xCoefficients+ax.xCoefficients, this.constant+ ax.constant);
+        return b.toString();
+    }
+
+    private static long[] change2Array(String s){
+        long[] num = new long[s.length()];
+
+        for (int i = 0; i < s.length(); i++) {
+            num[i] = s.charAt(i)-'0';
         }
+
+        return num;
+    }
+
+    private static String change2String(long[] arr){
+        StringBuilder b = new StringBuilder();
+
+        boolean no0 = false;
+        for(long l: arr){
+            if(l!=0){
+                no0 = true;
+            }
+
+            if(no0){
+                b.append(l);
+            }
+        }
+
+        return no0?b.toString():"0";
     }
 
     private static class FastReader implements Closeable {

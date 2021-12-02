@@ -1,23 +1,58 @@
-package luogu.main.basic;
+package luogu.main.simulation_highPrecision;
 
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.StringTokenizer;
 
-public class P2001 {
-
+public class P1563 {
     public static void main(String[] args) {
         FastReader fastReader = new FastReader(System.in);
         FastWriter fastWriter = new FastWriter(System.out);
 
-        long l1 = fastReader.nextLong();
-        long l2 = fastReader.nextLong();
+        int n = fastReader.nextInt();
+        int m = fastReader.nextInt();
 
-        fastWriter.println(l1+l2);
+        Person.people = new Person[n];
+        for (int i = 0; i < n; i++) {
+            Person.people[i] = new Person(i, fastReader.nextInt(), fastReader.next());
+        }
+
+        Person p = Person.people[0];
+        for (int i = 0; i < m; i++) {
+            boolean isLeft = fastReader.nextInt()==0;
+            int count = fastReader.nextInt();
+            p = p.rotate(isLeft, count);
+        }
+        fastWriter.println(p);
 
         fastReader.close();
         fastWriter.close();
+    }
+
+    private static class Person {
+        static Person[] people;
+        private final int index;
+        private final boolean isOut;
+        private final String name;
+
+        public Person(int index, int i, String name) {
+            this.index = index;
+            this.isOut = (i == 1);
+            this.name = name;
+        }
+
+        public Person rotate(boolean isLeft, int count){
+            if(isLeft ^ isOut){
+                return people[(index - count + people.length) % people.length];
+            }else {
+                return people[(index + count + people.length) % people.length];
+            }
+        }
+
+        public String toString(){
+            return name;
+        }
     }
 
     private static class FastReader implements Closeable {
@@ -42,9 +77,9 @@ public class P2001 {
         }
 
         public boolean hasNext() {
-            while(!st.hasMoreTokens()) {
+            while (!st.hasMoreTokens()) {
                 String s = nextLine();
-                if(s==null) return false;
+                if (s == null) return false;
                 eat(s);
             }
             return true;
@@ -55,7 +90,7 @@ public class P2001 {
             return st.nextToken();
         }
 
-        public boolean nextBoolean(){
+        public boolean nextBoolean() {
             return Boolean.parseBoolean(next());
         }
 
@@ -68,27 +103,27 @@ public class P2001 {
             return Long.parseLong(next());
         }
 
-        public float nextFloat(){
+        public float nextFloat() {
             return Float.parseFloat(next());
         }
 
-        public double nextDouble(){
+        public double nextDouble() {
             return Double.parseDouble(next());
         }
 
-        public BigInteger nextBigInteger(){
+        public BigInteger nextBigInteger() {
             return new BigInteger(next());
         }
 
-        public BigDecimal nextBigDecimal(){
+        public BigDecimal nextBigDecimal() {
             return new BigDecimal(next());
         }
 
-        public void close(){
-            try{
-                st=null;
+        public void close() {
+            try {
+                st = null;
                 br.close();
-            }catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
                 System.exit(1);
             }
@@ -96,26 +131,26 @@ public class P2001 {
         }
     }
 
-    private static class FastWriter implements Closeable{
+    private static class FastWriter implements Closeable {
         private final PrintWriter writer;
 
-        public FastWriter(OutputStream out){
-            this.writer=new PrintWriter(out);
+        public FastWriter(OutputStream out) {
+            this.writer = new PrintWriter(out);
         }
 
-        public void print(Object object){
+        public void print(Object object) {
             writer.write(object.toString());
         }
 
-        public void printf(String format,Object... os){
-            writer.write(String.format(format,os));
+        public void printf(String format, Object... os) {
+            writer.write(String.format(format, os));
         }
 
-        public void println(){
+        public void println() {
             writer.write(System.lineSeparator());
         }
 
-        public void println(Object object){
+        public void println(Object object) {
             writer.write(object.toString());
             writer.write(System.lineSeparator());
         }

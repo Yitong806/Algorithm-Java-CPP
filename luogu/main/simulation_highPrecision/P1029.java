@@ -1,60 +1,58 @@
-package luogu.main.dp;
+<<<<<<< HEAD:luogu/main/simulation_highPrecision/P1029.java
+package luogu.main.simulation_highPrecision;
+=======
+package luogu.main.math;
+>>>>>>> ef495ec5ffc5b2e0c7600edae059e8b8b1644517:luogu/main/P1029.java
 
 import java.io.*;
-import java.util.*;
-import java.math.*;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.StringTokenizer;
 
-public class P1002 {
+public class P1029 {
     public static void main(String[] args) {
         FastReader fastReader = new FastReader(System.in);
         FastWriter fastWriter = new FastWriter(System.out);
 
-        int xb = fastReader.nextInt();
-        int yb = fastReader.nextInt();
+        long x0 = fastReader.nextLong();
+        long y0 = fastReader.nextLong();
 
-        int xh = fastReader.nextInt();
-        int yh = fastReader.nextInt();
-
-        long[][] chessboard = new long[xb+1][yb+1];
-
-        for (int i = 0; i <= xb; i++) {
-            if(isAttackable(i,0,xh,yh)){
-                chessboard[i][0] = 0;
-                break;
-            }else{
-                chessboard[i][0] = 1;
-            }
-
-        }
-
-        for (int i = 0; i <= yb; i++) {
-            if(isAttackable(0,i,xh,yh)){
-                chessboard[0][i] = 0;
-                break;
-            }else{
-                chessboard[0][i] = 1;
-            }
-        }
-
-        for (int i = 1; i <= xb; i++) {
-            for (int j = 1; j <= yb; j++) {
-                if (isAttackable(i, j, xh, yh) ) {
-                    chessboard[i][j] = 0;
-                } else {
-                    chessboard[i][j] = chessboard[i - 1][j] + chessboard[i][j - 1];
-                }
-            }
-        }
-
-        fastWriter.println(chessboard[xb][yb]);
+        fastWriter.println(getAnswer(x0,y0));
 
         fastReader.close();
         fastWriter.close();
     }
-    private static boolean isAttackable(int x,int y,int xh,int yh){
-        return (Math.abs(x-xh)==2 && Math.abs(y-yh)==1)
-                ||(Math.abs(x-xh)==1 && Math.abs(y-yh)==2)
-                ||(x==xh&&y==yh);
+    private static long getAnswer(long x0,long y0){
+        long answer = 0;
+
+        long start = Math.min(x0,y0);
+        long end = Math.max(x0,y0);
+        for (long p = start; p <= end; p++) {
+            if((x0*y0)%p!=0){
+                continue;
+            }
+
+            long q = (x0*y0)/p;
+
+            if(p%start==0 && q%start==0 && end%p==0 && end%q==0 && isGCD(p,q,x0)){
+                answer++;
+            }
+        }
+
+        return answer;
+    }
+
+    private static boolean isGCD(long p, long q, long x0){
+        long big = Math.max(p,q);
+        long small = Math.min(p,q);
+
+        while (big%small!=0){
+            long t = big;
+            big = small;
+            small = t % small;
+        }
+
+        return x0 == small;
     }
 
     private static class FastReader implements Closeable {

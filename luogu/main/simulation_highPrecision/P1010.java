@@ -1,44 +1,71 @@
+<<<<<<< HEAD:luogu/main/simulation_highPrecision/P1010.java
+package luogu.main.simulation_highPrecision;
+=======
 package luogu.main.math;
+>>>>>>> ef495ec5ffc5b2e0c7600edae059e8b8b1644517:luogu/main/P1010.java
 
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.StringTokenizer;
 
-public class P1017 {
+public class P1010 {
+    private static final StringBuilder answerBuilder = new StringBuilder();
     public static void main(String[] args) {
         FastReader fastReader = new FastReader(System.in);
         FastWriter fastWriter = new FastWriter(System.out);
 
-        int num10 = fastReader.nextInt();
+        int n= fastReader.nextInt();
+        buildAnswer(n);
 
-        int R = fastReader.nextInt();
-
-        fastWriter.println(answer(num10,R));
+        fastWriter.println(answerBuilder.toString());
 
         fastReader.close();
         fastWriter.close();
     }
-    private static String answer(int num10,int R){
-        //R = Math.abs(R);
-        int v = num10;
-
-        StringBuilder answerBuilder = new StringBuilder();
-
-        while (num10!=0){
-            int nu = num10 % R;
-            num10 /= R;
-
-            if(nu<0){
-                nu += Math.abs(R);
-                num10++;
+    private static void buildAnswer(int n){
+        switch (n){
+            case 1:{
+                answerBuilder.append("2(0)");
+                return;
             }
-            answerBuilder.append(nu<10?nu:String.valueOf((char) ('A'+nu-10)));
-        }
-        answerBuilder.reverse();
+            case 2:{
+                answerBuilder.append("2");
+                return;
+            }
+            case 4:{
+                answerBuilder.append("2(2)");
+                return;
+            }
 
-        return v + "=" +
-                answerBuilder + "(base" + R + ")";
+            default:{
+                int a = 0;
+                while (n!=0){
+                    if(n==1||n==2||n==4){
+                        buildAnswer(n);
+                        break;
+                    }
+
+                    int maxPow = (int) Math.floor(Math.log(n)/Math.log(2));
+
+                    if(maxPow == 1){
+                        answerBuilder.append("2");
+                    }else{
+                        answerBuilder.append("2(");
+                        buildAnswer(maxPow);
+                        answerBuilder.append(")");
+                    }
+
+                    int rest = (int) (n - Math.pow(2,maxPow));
+
+                    if(rest!=0){
+                        answerBuilder.append("+");
+                    }
+
+                    n = rest;
+                }
+            }
+        }
     }
 
     private static class FastReader implements Closeable {

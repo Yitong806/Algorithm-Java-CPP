@@ -1,40 +1,45 @@
-package luogu.main.basic;
+<<<<<<< HEAD:luogu/main/simulation_highPrecision/P1008.java
+package luogu.main.simulation_highPrecision;
+=======
+package luogu.main.simulation;
+>>>>>>> ef495ec5ffc5b2e0c7600edae059e8b8b1644517:luogu/main/P1008.java
 
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.StringTokenizer;
 
-public class P1000 {
+public class P1008 {
     public static void main(String[] args) {
         FastReader fastReader = new FastReader(System.in);
         FastWriter fastWriter = new FastWriter(System.out);
 
-        fastWriter.println("                ********\n" +
-                "               ************\n" +
-                "               ####....#.\n" +
-                "             #..###.....##....\n" +
-                "             ###.......######              ###            ###\n" +
-                "                ...........               #...#          #...#\n" +
-                "               ##*#######                 #.#.#          #.#.#\n" +
-                "            ####*******######             #.#.#          #.#.#\n" +
-                "           ...#***.****.*###....          #...#          #...#\n" +
-                "           ....**********##.....           ###            ###\n" +
-                "           ....****    *****....\n" +
-                "             ####        ####\n" +
-                "           ######        ######\n" +
-                "##############################################################\n" +
-                "#...#......#.##...#......#.##...#......#.##------------------#\n" +
-                "###########################################------------------#\n" +
-                "#..#....#....##..#....#....##..#....#....#####################\n" +
-                "##########################################    #----------#\n" +
-                "#.....#......##.....#......##.....#......#    #----------#\n" +
-                "##########################################    #----------#\n" +
-                "#.#..#....#..##.#..#....#..##.#..#....#..#    #----------#\n" +
-                "##########################################    ############");
+        for (int a = 123; a *3 <= 987; a++){
+            int b = a*2;
+            int c = a*3;
+
+            String abc = a+" "+b+" "+c;
+
+            if(isValid(abc)){
+                fastWriter.println(abc);
+            }
+        }
 
         fastReader.close();
         fastWriter.close();
+    }
+    private static boolean isValid(String abc){
+        Set<Character>cs = new HashSet<>();
+        for(int i = 0;i< abc.length();i++){
+            if(abc.charAt(i)=='0'){
+                return false;
+            }
+            cs.add(abc.charAt(i));
+        }
+
+        return cs.size()==9+1;
     }
 
     private static class FastReader implements Closeable {
