@@ -1,37 +1,29 @@
 package leetcode.medium;
 
-import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Leet0003 {
     // Not Accepted
     public int lengthOfLongestSubstring(String s) {
-        char[]cs = s.toCharArray();
-        int start = 0, end = 0, indexStart = 0, indexEnd = 0;
+        char[] cs = s.toCharArray();
+        Set<Character> characterSet = new HashSet<>();
 
-        boolean[]contains = new boolean[260];
-        Arrays.fill(contains,false);
-
-        int length = 0;
-        while (indexEnd < cs.length) {
-
-            while (indexEnd < cs.length&&!contains[cs[indexEnd]]) {
-                contains[cs[indexEnd]]=true;
-                indexEnd++;
+        int left = 0, right = 0, answer = 0;
+        final int length = cs.length;
+        while (right < length){
+            char leftChar = cs[left];
+            char rightChar = cs[right];
+            if(characterSet.contains(rightChar)){
+                characterSet.remove(leftChar);
+                left++;
+            }else {
+                characterSet.add(rightChar);
+                right++;
+                answer = Math.max(answer, characterSet.size());
             }
-
-            if (indexEnd - indexStart > length) {
-                start = indexStart;
-                end = indexEnd;
-                length = indexEnd - indexStart;
-            }
-
-            contains[cs[indexStart]] = false;
-            indexStart++;
-            indexEnd++;
-
-
         }
 
-        return end-start;
+        return answer;
     }
 }
