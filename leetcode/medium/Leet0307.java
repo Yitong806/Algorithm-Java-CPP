@@ -1,6 +1,6 @@
 package leetcode.medium;
 
-public class Leet307 {
+public class Leet0307 {
 
     public static void main(String[] args) {
         NumArray na = new NumArray(new int[]{1,2,3,4,5,6});
