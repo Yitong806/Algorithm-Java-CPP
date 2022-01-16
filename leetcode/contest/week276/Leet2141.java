@@ -21,15 +21,7 @@ public class Leet2141 {
     }
 
     private boolean isOK(long mid, int n, int[] batteries){
-        long batterySum = 0 , batteryRequired = mid * n;
-
-        for (int battery: batteries){
-            batterySum += Math.min(battery, mid);
-            if(batterySum >  batteryRequired){
-                return true;
-            }
-        }
-        return batterySum > batteryRequired;
+        return Arrays.stream(batteries).mapToLong(battery -> Math.min(battery, mid)).sum() >= mid * n;
     }
 
     private long batteriesSum(int[] batteries){
