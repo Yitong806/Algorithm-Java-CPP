@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
-public class Main {
+public class Main{
     public static void main(String[] args) throws InterruptedException, AWTException {
         Thread.sleep(5000);
         Robot r = new Robot();
