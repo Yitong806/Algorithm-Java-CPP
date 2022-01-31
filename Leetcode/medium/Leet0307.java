@@ -2,13 +2,6 @@ package leetcode.medium;
 
 public class Leet0307 {
 
-    public static void main(String[] args) {
-        NumArray na = new NumArray(new int[]{1,2,3,4,5,6});
-        System.out.println(na.sumRange(0,2));
-        na.update(3,99);
-        System.out.println(na.sumRange(0,4));
-    }
-
     private static class NumArray {
 
         SegmentTreeNode root;
