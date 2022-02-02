@@ -43,6 +43,11 @@ public:
             lastIndex++;
         }
 
+        free(appearTimeS);
+        free(appearTimeP);
+        appearTimeS = nullptr;
+        appearTimeP = nullptr;
+
         return v;
     }
 
