@@ -1,4 +1,4 @@
-# Algorithm@Java
+# Algorithm@Java@C++
 
 YeeTone WANG is a code farmer in SUSTech, he is good at coding and English speaking, but poor at algorithm design and analysis.
 YeeTone WANG decided to make efforts to improve his algorithm design ability, and this repository helps a lot.
