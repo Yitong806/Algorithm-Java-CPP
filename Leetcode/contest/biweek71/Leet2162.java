@@ -36,7 +36,6 @@ public class Leet2162 {
 
 
             calculateCost(s,0,moveCost, pushCost);
-            System.out.println(s+" "+currentCost);
             finalCost = Math.min(finalCost, currentCost);
         }
 

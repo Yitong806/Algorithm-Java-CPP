@@ -28,8 +28,6 @@ public class Leet2163 {
             leftMinNSums[i] = leftNSum;
         }
 
-        System.out.println(Arrays.toString(leftMinNSums));
-
 
         long[] rightNSums = new long[nums.length];
         long rightNSum = 0;
@@ -52,11 +50,9 @@ public class Leet2163 {
             rightNSums[i] = rightNSum;
 
         }
-        System.out.println(Arrays.toString(rightNSums));
 
         long answer = Long.MAX_VALUE;
         for (int i = n - 1; i < 2 * n; i ++){
-            System.out.println(leftMinNSums[i] + " "+rightNSums[i]);
             answer = Math.min(answer, leftMinNSums[i]- rightNSums[i]);
         }
 
