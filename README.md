@@ -15,16 +15,26 @@ There are several parts in this repo:
 - Leetcode: The answer of Leetcode questions, and YeeTone WANG mainly focuses on this part
 - Luogu: The anlgorithm questions on Luogu, which is challenging
 
-## About Author
-Name: YeeTone WANG
+## Why does YeeTone WANG want to improve his ability of algorithm design and analysis?
 
-SID: 11910104
+### 1. Algorithm can improve your ability about:
+1. Abstracting Problems(问题抽象能力)
+2. Solving Problems(问题解决能力)
+3. Coding(编码能力)
+4. API Understanding(API理解能力)
+5. Debugging(调试能力)
+6. Testing(测试能力)
+7. Understanding Ideas(思想理解能力)
 
-Email: 11910104@mail.sustech.edu.cn
-
-Major: Computer Science and Technology
-
-| Course Name  | CS203: DSAA | CS208: ADA |
-|--------------|-------------|------------|
-| Course Score | 91          | 98         |
-| Course Grade | A-          | A+         |
+### 2. Algorithm can help avoid those wrong cases in the future:
+01. Memory Leak(内存泄漏)
+02. Stack Overflow(栈溢出)
+03. Infinity Loop(死循环)
+04. Array Index out of Bounds(数组越界)
+05. Integer Overflow and Floating Point Error(整形溢出和浮点误差)
+06. Uninitialized Variables(未初始化变量)
+07. Incorrect Boundary Handling(非法边界处理)
+08. Infinity Recursion(无限递归)
+09. Ambiguous Variables(二义变量)
+10. Priority of Operators(运算符优先级)
+11. Cache Hitting and Missing(缓存命中与丢失)
