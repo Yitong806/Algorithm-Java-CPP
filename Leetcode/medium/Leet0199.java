@@ -1,14 +1,39 @@
-package leetcode.medium;
-
 import java.util.*;
 
-public class Leet0199 {
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode() {}
+ * TreeNode(int val) { this.val = val; }
+ * TreeNode(int val, TreeNode left, TreeNode right) {
+ * this.val = val;
+ * this.left = left;
+ * this.right = right;
+ * }
+ * }
+ */
 
-    private int currentDepth;
-    private final List<Integer> result = new ArrayList<>();
+public class Leet0199 {
+    int depth = 0;
+    TreeNode[] depthTreeNodeMapping = new TreeNode[105];
     public List<Integer> rightSideView(TreeNode root) {
+        depth = 0;
+        Arrays.fill(depthTreeNodeMapping, null);
         dfs(root);
+        List<Integer> result = new ArrayList<>(100);
+        for (TreeNode treeNode : depthTreeNodeMapping) {
+            if (treeNode == null) {
+                break;
+            }
+
+            result.add(treeNode.val);
+        }
+
         return result;
+
     }
 
     private void dfs(TreeNode root){
@@ -16,23 +41,24 @@ public class Leet0199 {
             return;
         }
 
-        if(result.size() < currentDepth + 1){
-            result.add(root.val);
-        }else {
-            result.set(currentDepth, root.val);
-        }
-        currentDepth += 1;
+
+        depth++;
         dfs(root.left);
+        depth--;
+
+        depthTreeNodeMapping[depth] = root;
+
+        depth++;
         dfs(root.right);
-        currentDepth -= 1;
+        depth--;
     }
 
-    private static class TreeNode{
+    private static class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
-        TreeNode(){
 
+        TreeNode() {
         }
 
         TreeNode(int val) {
@@ -43,13 +69,6 @@ public class Leet0199 {
             this.val = val;
             this.left = left;
             this.right = right;
-        }
-
-        @Override
-        public String toString() {
-            return "TreeNode{" +
-                    "val=" + val +
-                    '}';
         }
     }
 }
