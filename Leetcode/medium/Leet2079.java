@@ -17,7 +17,4 @@ public class Leet2079 {
         return steps;
     }
 
-    public static void main(String[] args) {
-        new Leet2079().wateringPlants(new int[]{1,1,1,4,2,3}, 4);
-    }
 }
