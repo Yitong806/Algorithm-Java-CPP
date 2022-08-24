@@ -3,13 +3,13 @@ import java.util.*;
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
- * int val;
+ * int index;
  * TreeNode left;
  * TreeNode right;
  * TreeNode() {}
- * TreeNode(int val) { this.val = val; }
- * TreeNode(int val, TreeNode left, TreeNode right) {
- * this.val = val;
+ * TreeNode(int index) { this.index = index; }
+ * TreeNode(int index, TreeNode left, TreeNode right) {
+ * this.index = index;
  * this.left = left;
  * this.right = right;
  * }
