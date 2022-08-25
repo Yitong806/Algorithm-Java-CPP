@@ -1,38 +1,38 @@
-package leetcode.medium;
-
 import java.util.ArrayList;
-import java.util.BitSet;
 import java.util.List;
 
 public class Leet0078 {
-    public static List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> result = new ArrayList<>();
 
-        int maxPow = (int)(Math.pow(2, nums.length) - 1);
+    List<List<Integer>> answer = new ArrayList<>();
 
-        for (int i = 0; i <= maxPow; i++) {
-            StringBuilder binary = new StringBuilder(Integer.toBinaryString(i));
-            binary.reverse();
+    boolean[] isSelected;
 
-            while (binary.length() < nums.length){
-                binary.append("0");
-            }
+    public List<List<Integer>> subsets(int[] nums) {
+        isSelected = new boolean[nums.length];
+        dfs(nums, 0);
 
-            binary.reverse();
+        return answer;
+    }
 
-
-            List<Integer> subset = new ArrayList<>();
-
-            for (int j = 0; j < binary.length(); j++) {
-                if(binary.charAt(j) == '1'){
-                    subset.add(nums[j]);
+    private void dfs(int[] nums, int currentIndex){
+        if(currentIndex == nums.length){
+            List<Integer> list = new ArrayList<>();
+            for (int i = 0; i < isSelected.length; i++){
+                if(isSelected[i]){
+                    list.add(nums[i]);
                 }
             }
+            answer.add(list);
 
-            result.add(subset);
+            return;
         }
 
-        return result;
+        isSelected[currentIndex] = false;
+        dfs(nums, currentIndex + 1);
+        isSelected[currentIndex] = true;
+        dfs(nums, currentIndex + 1);
+
+
     }
 
 }
