@@ -24,7 +24,6 @@ public class Leet1306 {
     }
 
     private boolean dfs(int[] arr, int current) {
-        System.out.println(current);
 
         if(arr[current] == 0){
             visited[current] = true;
