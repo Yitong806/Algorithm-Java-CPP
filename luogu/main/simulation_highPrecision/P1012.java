@@ -1,9 +1,3 @@
-<<<<<<< HEAD:luogu/main/simulation_highPrecision/P1012.java
-package luogu.main.simulation_highPrecision;
-=======
-package luogu.main.string;
->>>>>>> ef495ec5ffc5b2e0c7600edae059e8b8b1644517:luogu/main/P1012.java
-
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;

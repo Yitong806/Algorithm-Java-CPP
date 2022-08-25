@@ -1,5 +1,3 @@
-package luogu.main.simulation_highPrecision;
-
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;

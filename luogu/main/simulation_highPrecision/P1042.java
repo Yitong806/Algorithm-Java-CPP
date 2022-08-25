@@ -1,15 +1,8 @@
-<<<<<<< HEAD:luogu/main/simulation_highPrecision/P1042.java
-package luogu.main.simulation_highPrecision;
-=======
-package luogu.main.greedy;
->>>>>>> ef495ec5ffc5b2e0c7600edae059e8b8b1644517:luogu/main/P1007.java
-
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.StringTokenizer;
 
-<<<<<<< HEAD:luogu/main/simulation_highPrecision/P1042.java
 public class P1042 {
     private static final FastReader fastReader = new FastReader(System.in);
     private static final FastWriter fastWriter = new FastWriter(System.out);

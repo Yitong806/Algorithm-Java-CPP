@@ -1,9 +1,3 @@
-<<<<<<< HEAD:luogu/main/simulation_highPrecision/P1000.java
-package luogu.main.simulation_highPrecision;
-=======
-package luogu.main.basic;
->>>>>>> ef495ec5ffc5b2e0c7600edae059e8b8b1644517:luogu/main/P1000.java
-
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
