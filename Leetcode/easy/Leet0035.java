@@ -13,7 +13,7 @@ public class Leet0035 {
                 ans = mid;
                 low = mid + 1;
             }else {
-                ans = mid + 1;
+                ans = mid;
                 high = mid - 1;
             }
         }
