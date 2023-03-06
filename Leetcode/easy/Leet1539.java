@@ -1,24 +1,27 @@
+package leetcode.easy;
+
 public class Leet1539 {
     public int findKthPositive(int[] arr, int k) {
         int left = 0, right = arr.length - 1;
-        int answer = k;
-
-        while (left <= right){
-            int mid = (left + right) / 2;
-
-            if(isOK(arr, mid, k)){
+        int ans = -100;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (accept(arr, k, mid)) {
                 right = mid - 1;
-            }else {
+            } else {
                 left = mid + 1;
-                answer = mid + 1 + k;
             }
+
+            ans = left + k;
         }
 
-        return answer;
+        return ans;
+
+
+
     }
 
-    private boolean isOK(int[] arr, int midIndex, int k){
-        int needed = arr[midIndex] - midIndex - 1;
-        return needed >= k;
+    public boolean accept(int[] arr, int k, int mid) {
+        return arr[mid] - mid > k;
     }
 }
