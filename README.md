@@ -1,21 +1,21 @@
 # Algorithm(算法与数据结构之美)@Java@C++
 
-YeeTone WANG is a code farmer in SUSTech, he is good at coding and English speaking, but poor at algorithm design and analysis.
-YeeTone WANG decided to make efforts to improve his algorithm design ability, and this repository helps a lot.
+Yitong WANG is a code farmer, he is good at debuging and English speaking.
+Yitong WANG decided to make efforts to improve his algorithm design ability, and this repository helps a lot.
 
 ## Repository Content
 There are several parts in this repo:
 
 - CS208OJ: The lab exercise of CS208: Algorithm Design and Analysis **(ADA)** by Prof.Yuhui SHI and Mrs.Yao ZHAO in 2021 Spring
-- FastIO: The fast reading and outputing template design by YeeTone WANG using Java language, since Scanner and System.out is low-efficiency
+- FastIO: The fast reading and outputing template design by Yitong WANG using Java language, since Scanner and System.out is low-efficiency
 - JCoderAC: The lab exercise of CS203: Data Structure and Algorithm Analysis **(DSAA)** by Prof.Ran CHENG in 2021 Spring
 - PTA\_Answer: The basic programming exercise in PTA, which is very simple
 - SUSTechACM: The exercise in SUSTechACM OJ, which is challenging
 - SYZOJ: The exercise in SYZOJ, which is not too difficult
-- Leetcode: The answer of Leetcode questions, and YeeTone WANG mainly focuses on this part
+- Leetcode: The answer of Leetcode questions, and Yitong WANG mainly focuses on this part
 - Luogu: The anlgorithm questions on Luogu, which is challenging
 
-## Why does YeeTone WANG want to improve his ability of algorithm design and analysis?
+## Why does Yitong WANG want to improve his ability of algorithm design and analysis?
 
 ### 1. Algorithm can improve your ability about:
 1. Abstracting Problems(问题抽象能力)
